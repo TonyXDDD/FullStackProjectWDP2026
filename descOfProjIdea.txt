@@ -1,0 +1,25 @@
+Project Name: SafeEats
+
+a. What problem does your app solve or what purpose does it serve?
+
+The purpose of this app is to serve as a central hub for people who struggle to find places to 
+eat comfortably due to their food allergies, dietary restrictions, or medical conditions such as 
+celiac disease. Ive seen first hand how individuals like my friends or my girlfriend experience a ton of 
+stress and uncertainty when dining out because they are unsure whether restaurants can properly accommodate 
+their needs, or have safely prepared their food. This website will provide a supportive, community-driven 
+platform where users can discover, review, and share information about restaurants that accommodate specific 
+dietary requirements.
+
+b. Who is the intended user?
+
+The intended users are people with food allergies, dietary restrictions, or medical conditions 
+(such as celiac disease) who need help finding safe places to eat. It is also useful for parents 
+or caregivers managing someone’s dietary needs.
+
+c. What actions will users be able to perform (e.g., sign up, add items, search, 
+comment, etc.)
+
+My end goal for this project is that users will be able to create an account, log in, and set 
+their dietary preferences. They can search for restaurants, filter results based on specific 
+allergies or restrictions, post reviews, rate restaurants based on safety and accommodation, 
+and comment on other users posts. Users will also be able to edit or delete their own reviews!

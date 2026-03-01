@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeEats - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <span id="safe">Safe</span><span id="eats">Eats♡</span>
+        </div>
+        <div class="nav-right">
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="post.html">Posts</a>
+        </div>
+    </nav>
+     <div class="form-container">
+        <h1>Sign in to your <span id="safe">Safe</span><span id="eats">Eats♡</span> account</h1>
+        <form action="/login" method="POST">
+            <label for="identifier">Username or Email</label>
+            <input type="text" id="identifier" name="identifier" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
