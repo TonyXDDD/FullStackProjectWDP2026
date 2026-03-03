@@ -23,3 +23,5 @@ My end goal for this project is that users will be able to create an account, lo
 their dietary preferences. They can search for restaurants, filter results based on specific 
 allergies or restrictions, post reviews, rate restaurants based on safety and accommodation, 
 and comment on other users posts. Users will also be able to edit or delete their own reviews!
+
+(Adding this bottom section for Assignment 3 repo!!)
