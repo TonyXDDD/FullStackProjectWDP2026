@@ -1,22 +1,30 @@
+import { fetchData } from "./main.js"
+import { getCurrentUser } from "./user.js"
 
 let postForm = document.getElementById("post")
+if(postForm) postForm.addEventListener('submit', createPost)
 
-if(postForm) postForm.addEventListener('submit', post)
-
-function post(e) {
+function createPost(e) {
     e.preventDefault()
 
     let restaurantname = document.getElementById("restaurantName").value
-    let location = document.getElementById("location").value
+    let restaurantLocation = document.getElementById("location").value  
     let rating125 = document.getElementById("rating").value
     let wrtrevw = document.getElementById("postText").value
-    
-    const user = {
-        restaurantname: restaurantname,
-        location: location,
-        rating125: rating125,
-        wrtrevw: wrtrevw
+
+    let cUser = getCurrentUser()
+
+    const newPost = {
+        user_id: cUser.user_id,         
+        restaurant_name: restaurantname, 
+        location: restaurantLocation,    
+        safety_rating: rating125,        
+        review_text: wrtrevw            
     }
 
-    console.log(user)
-    }
+    fetchData('/post/createPost', newPost, 'POST')
+        .then(data => {
+            window.location.reload()     
+        })
+        .catch(err => alert(err.message))
+}

@@ -6,19 +6,41 @@ async function createPostTable() {
     post_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user(user_id),
-    restaurant_id INT NOT NULL,
-    FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id),
+    restaurant_name VARCHAR(100),
+    location VARCHAR(100),
     title VARCHAR(100),
     review_text TEXT,
     safety_rating INT,
     date_posted DATETIME DEFAULT CURRENT_TIMESTAMP,
     last_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    ); `
+    );`
 
     await con.query(sql)
 }
 
-createUserTable()
+createPostTable()
+
+async function createPost(post) {
+    let sql = `
+      INSERT INTO post (user_id, restaurant_name, location, review_text, safety_rating)
+      VALUES (?, ?, ?, ?, ?)
+    `
+    await con.query(sql, [
+        post.user_id,
+        post.restaurant_name,
+        post.location,
+        post.review_text,
+        post.safety_rating
+    ])
+}
+
+async function getPostsByUser(user_id) {
+    let sql = `
+      SELECT * FROM post WHERE user_id = ?
+    `
+    return await con.query(sql, [user_id])
+}
+
 
 async function getAllPosts() {
     let sql = `
@@ -27,4 +49,8 @@ async function getAllPosts() {
     return await con.query(sql)
 }
 
-module.exports = { getAllPosts }
+module.exports = { 
+    createPost, 
+    getPostsByUser, 
+    getAllPosts 
+}
