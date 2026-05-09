@@ -11,4 +11,24 @@ router.get('/getAllUsers', async (req, res) => {
     }
 })
 
+router.post('/register', async (req, res) => {
+    try {
+        const newUser = await user.register(req.body);
+        console.log(newUser)
+        res.send({...newUser, password: undefined})
+    }   catch(error) {
+        res.status(401).send({message: error.message});
+    }
+})
+
+router.post('/login', async (req, res) => {
+    try {
+        const existingUser = await user.login(req.body)
+        console.log(existingUser)
+        res.send({...existingUser, password: undefined})
+    } catch(err) {
+        res.status(401).send({message: err.message})
+    }
+})
+
 module.exports = router

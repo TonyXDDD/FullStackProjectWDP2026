@@ -1,4 +1,5 @@
 const con = require("./db_connect")
+const bcrypt = require("bcrypt")
 
 async function createUserTable() {
     let sql = `
@@ -18,6 +19,54 @@ async function createUserTable() {
 
 createUserTable()
 
+async function register(user) {
+
+    let existingUser = await getUserByUsername(user.username)
+
+    if(existingUser) {
+        throw Error("Username already exists")
+    }
+
+    let hashedPassword = await bcrypt.hash(user.password, 10)
+
+    let sql = `
+    INSERT INTO user
+    (username, email, password, first_name, last_name, bio)
+    VALUES (?, ?, ?, ?, ?, ?)
+    `
+
+    await con.query(sql, [
+        user.username,
+        user.email,
+        hashedPassword,
+        user.first_name,
+        user.last_name,
+        user.bio
+    ])
+
+    return await login(user)
+}
+
+async function login(user) {
+
+    let existingUser = await getUserByUsername(user.username)
+
+    if(!existingUser) {
+        throw Error("Username does not exist!")
+    }
+
+    let match = await bcrypt.compare(
+        user.password,
+        existingUser.password
+    )
+
+    if(!match) {
+        throw Error("Password incorrect!")
+    }
+
+    return existingUser
+}
+
 async function getAllUsers() {
     let sql = `
       SELECT * FROM user;
@@ -25,4 +74,20 @@ async function getAllUsers() {
     return await con.query(sql)
 }
 
-module.exports = { getAllUsers }
+async function getUserByUsername(username) {
+
+    let sql = `
+    SELECT * FROM user
+    WHERE username=?
+    `
+
+    let cUser = await con.query(sql, [username])
+
+    return cUser[0]
+}
+
+module.exports = {
+    register,
+    login,
+    getAllUsers
+}

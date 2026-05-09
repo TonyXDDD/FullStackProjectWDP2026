@@ -1,14 +1,13 @@
+import { fetchData } from "./main.js"
 
 //FOR LOGIN
 let loginForm = document.getElementById("login")
-
 if(loginForm) loginForm.addEventListener('submit', login)
 
 //FOR REGISTER
 let registerForm = document.getElementById("register")
-
 if (registerForm) registerForm.addEventListener('submit', register)
-  
+
 //FOR LOGIN
 function login(e) {
     e.preventDefault()
@@ -19,16 +18,19 @@ function login(e) {
     if (checkPassword(password)) {
 
         let user = {}
-
         if (identifier.includes("@")) {
             user.email = identifier
         } else {
             user.username = identifier
         }
-
         user.password = password
 
-        console.log(user)
+        fetchData('/user/login', user, 'POST')
+            .then(data => {
+                setCurrentUser(data)
+                window.location.href = "post.html"
+            })
+            .catch(err => alert(err.message))
 
     } else {
         console.log("password not gud :( ")
@@ -49,13 +51,18 @@ function register(e) {
 
         const newUser = {
             username: username,
-            firstName: firstName,
-            lastName: lastName,
+            first_name: firstName,  
+            last_name: lastName,    
             email: email,
             password: password
         }
 
-        console.log(newUser)
+        fetchData('/user/register', newUser, 'POST')
+            .then(data => {
+                setCurrentUser(data)
+                window.location.href = "post.html"
+            })
+            .catch(err => alert(err.message))
 
     } else {
         console.log("password not gud :( ")
@@ -64,4 +71,17 @@ function register(e) {
 
 function checkPassword(password) {
     return true;
+}
+
+function setCurrentUser(user) {
+    localStorage.setItem('user', JSON.stringify(user))
+}
+
+export function getCurrentUser() {
+    return JSON.parse(localStorage.getItem('user'))
+}
+
+export function removeCurrentUser() {
+    localStorage.removeItem('user')
+    window.location.href = "login.html"
 }

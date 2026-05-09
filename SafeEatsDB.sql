@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS user (
     password VARCHAR(100) NOT NULL,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
-    date_joined DATE DEFAULT CURRENT_DATE,
+    date_joined DATE,
     bio VARCHAR(200)
 );
 
