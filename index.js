@@ -19,6 +19,9 @@ app.use("/user", userRoutes)
 const postRoutes = require("./server/routes/post")
 app.use("/post", postRoutes)
 
+const allergenRoutes = require("./server/routes/allergen")
+app.use("/allergen", allergenRoutes)
+
 const PORT = process.env.PORT || 3500
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}!!`))

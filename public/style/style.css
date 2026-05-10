@@ -210,3 +210,61 @@ textarea {
     width: 600px;
     padding-bottom: 40px;
 }
+
+#allergens-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+    font-family: Verdana;
+    font-size: 14px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+.allergen-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #f5f5f5;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.allergen-option input {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.allergen-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.allergen-tag {
+    background-color: #86af3f;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+#allergen-filter-container {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+}

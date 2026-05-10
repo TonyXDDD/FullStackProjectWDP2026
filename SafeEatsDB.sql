@@ -62,3 +62,155 @@ CREATE TABLE IF NOT EXISTS restaurant_allergen (
     safety_status VARCHAR(50),
     notes VARCHAR(200)
 );
+
+CREATE TABLE IF NOT EXISTS post_allergen (
+    post_id INT NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES post(post_id),
+    allergen_id INT NOT NULL,
+    FOREIGN KEY (allergen_id) REFERENCES allergen(allergen_id),
+    PRIMARY KEY (post_id, allergen_id)
+);
+
+INSERT INTO allergen 
+(allergen_name, description, severity_level, common_food_sources)
+VALUES
+
+(
+'Peanuts',
+'Legume allergy that can cause severe allergic reactions.',
+'High',
+'Peanut butter, candy, baked goods, sauces'
+),
+
+(
+'Tree Nuts',
+'Allergy to nuts such as almonds, walnuts, cashews, and pecans.',
+'High',
+'Almonds, walnuts, pesto, desserts'
+),
+
+(
+'Milk',
+'Dairy allergy involving proteins found in cow milk products.',
+'Medium',
+'Milk, cheese, butter, ice cream'
+),
+
+(
+'Eggs',
+'Allergy to proteins found in eggs.',
+'Medium',
+'Baked goods, mayonnaise, pasta'
+),
+
+(
+'Soy',
+'Allergy to soybeans and soy-based ingredients.',
+'Medium',
+'Soy sauce, tofu, processed foods'
+),
+
+(
+'Wheat',
+'Allergy to proteins found in wheat.',
+'Medium',
+'Bread, pasta, baked goods'
+),
+
+(
+'Gluten',
+'Sensitivity or intolerance to gluten proteins.',
+'High',
+'Bread, pasta, cereals, baked goods'
+),
+
+(
+'Celiac Disease',
+'Autoimmune disease triggered by gluten consumption.',
+'High',
+'Bread, pasta, flour, beer'
+),
+
+(
+'Fish',
+'Allergy to finned fish products.',
+'High',
+'Salmon, tuna, cod, seafood dishes'
+),
+
+(
+'Shellfish',
+'Allergy to crustaceans and shellfish.',
+'High',
+'Shrimp, crab, lobster, shellfish dishes'
+),
+
+(
+'Sesame',
+'Allergy to sesame seeds and sesame oil.',
+'Medium',
+'Hummus, sesame oil, burger buns'
+),
+
+(
+'Sulfites',
+'Sensitivity to preservatives commonly used in foods and drinks.',
+'Medium',
+'Wine, dried fruit, processed foods'
+),
+
+(
+'Mustard',
+'Allergy to mustard seeds and mustard products.',
+'Medium',
+'Mustard sauce, dressings, seasonings'
+),
+
+(
+'Corn',
+'Allergy or intolerance to corn and corn-derived products.',
+'Low',
+'Corn syrup, chips, tortillas'
+),
+
+(
+'Coconut',
+'Allergy to coconut products.',
+'Low',
+'Coconut milk, desserts, curries'
+),
+
+(
+'Garlic',
+'Sensitivity or allergy to garlic.',
+'Low',
+'Sauces, seasoning blends, pasta dishes'
+),
+
+(
+'Onion',
+'Sensitivity or allergy to onions.',
+'Low',
+'Soups, sauces, cooked dishes'
+),
+
+(
+'MSG',
+'Sensitivity to monosodium glutamate food additive.',
+'Low',
+'Chinese food, soups, snack foods'
+),
+
+(
+'Red Dye',
+'Sensitivity to artificial food coloring additives.',
+'Low',
+'Candy, drinks, processed snacks'
+),
+
+(
+'Nightshades',
+'Sensitivity to vegetables in the nightshade family.',
+'Low',
+'Tomatoes, peppers, eggplant, potatoes'
+);

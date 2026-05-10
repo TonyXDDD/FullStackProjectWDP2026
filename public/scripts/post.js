@@ -11,6 +11,7 @@ async function createPost(e) {
     let restaurantLocation = document.getElementById("location").value  
     let rating125 = document.getElementById("rating").value
     let wrtrevw = document.getElementById("postText").value
+    let selectedAllergens = Array.from(document.querySelectorAll('#allergens-container input:checked')).map(cb => cb.value)
 
     let cUser = getCurrentUser()
 
@@ -19,7 +20,8 @@ async function createPost(e) {
         restaurant_name: restaurantname, 
         location: restaurantLocation,    
         safety_rating: rating125,        
-        review_text: wrtrevw            
+        review_text: wrtrevw,
+        allergens: selectedAllergens            
     }
 
     fetchData('/post/createPost', newPost, 'POST')
@@ -34,21 +36,43 @@ async function loadPosts() {
     if(!cUser) return
 
     fetchData(`/post/getPostsByUser/${cUser.user_id}`, {}, 'GET')
-        .then(posts => {
+        .then(async posts => {
             let container = document.getElementById("posts-container")
             container.innerHTML = ""
-            posts.forEach(post => {
+            for(let post of posts) {
+                let allergens = await fetchData(`/allergen/getPostAllergens/${post.post_id}`, {}, 'GET')
+                let allergenTags = allergens.map(a => `<span class="allergen-tag">${a.allergen_name}</span>`).join('')
+                
                 container.innerHTML += `
                     <div class="post-card">
                         <h3>${post.restaurant_name}</h3>
                         <p class="location">${post.location}</p>
                         <p class="rating">Rating: ${post.safety_rating}/5</p>
                         <p class="review">${post.review_text}</p>
+                        <div class="allergen-tags">${allergenTags}</div>
                     </div>
+                `
+            }
+        })
+        .catch(err => console.log(err))
+}
+
+async function loadAllergens() {
+    fetchData('/allergen/getAllAllergens', {}, 'GET')
+        .then(allergens => {
+            let container = document.getElementById("allergens-container")
+            allergens.forEach(allergen => {
+                container.innerHTML += `
+                    <label class="allergen-option">
+                        <input type="checkbox" value="${allergen.allergen_id}">
+                        ${allergen.allergen_name}
+                    </label>
                 `
             })
         })
         .catch(err => console.log(err))
 }
+
+loadAllergens()
 
 loadPosts()

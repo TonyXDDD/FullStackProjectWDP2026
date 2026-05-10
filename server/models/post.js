@@ -25,13 +25,21 @@ async function createPost(post) {
       INSERT INTO post (user_id, restaurant_name, location, review_text, safety_rating)
       VALUES (?, ?, ?, ?, ?)
     `
-    await con.query(sql, [
-        post.user_id,
-        post.restaurant_name,
-        post.location,
-        post.review_text,
-        post.safety_rating
+    const result = await con.query(sql, [
+      post.user_id,
+      post.restaurant_name,
+      post.location,
+      post.review_text,
+      post.safety_rating
     ])
+
+    if(post.allergens && post.allergens.length > 0) {
+        for(let allergen_id of post.allergens) {
+            let allergenSql = `INSERT INTO post_allergen (post_id, allergen_id) VALUES (?, ?)`
+            await con.query(allergenSql, [result.insertId, allergen_id])
+        }
+    }
+
 }
 
 async function getPostsByUser(user_id) {
