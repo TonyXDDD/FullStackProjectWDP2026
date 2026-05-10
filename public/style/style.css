@@ -159,3 +159,54 @@ textarea {
 #posts-container:empty {
     display: none;
 }
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding-top: 80px;
+    width: 100%;
+}
+
+.search-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    width: 600px;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #86af3f;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    height: 37px;
+}
+
+#search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 600px;
+    padding-bottom: 40px;
+}

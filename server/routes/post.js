@@ -4,7 +4,7 @@ const post = require("../models/post")
 
 router.get('/getAllPosts', async (req, res) => {
     try {
-        const posts = await user.getAllPosts()
+        const posts = await post.getAllPosts()
         res.send(posts)
     } catch(err) {
         res.status(401).send({message: err.message})

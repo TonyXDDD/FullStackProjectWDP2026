@@ -3,19 +3,19 @@ import { getCurrentUser, removeCurrentUser } from "./user.js";
 let cUser = await getCurrentUser()
 let navRight = document.querySelector('.nav-right')
 
-if(navRight) {
-    if(cUser) {
-        navRight.innerHTML = `
-            <a href="post.html">Posts</a>
-            <a id="logout" href="#">Logout</a>
-        `
-    } else {
-        navRight.innerHTML = `
-            <a href="login.html">Login</a>
-            <a href="register.html">Register</a>
-            <a href="post.html">Posts</a>
-        `
-    }
+if(cUser) {
+    navRight.innerHTML = `
+        <a href="home.html">Home</a>
+        <a href="post.html">Posts</a>
+        <a id="logout" href="#">Logout</a>
+    `
+} else {
+    navRight.innerHTML = `
+        <a href="home.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <a href="post.html">Posts</a>
+    `
 }
 
 let logout = document.getElementById("logout")

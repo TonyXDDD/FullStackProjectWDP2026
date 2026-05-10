@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeEats - Login</title>
+    <title>SafeEats - Home</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -18,19 +18,17 @@
             <a href="post.html">Posts</a>
         </div>
     </nav>
-     <div class="form-container">
-        <h1>Sign in to your <span id="safe">Safe</span><span id="eats">Eats♡</span> account</h1>
-        <form id="login">
-            <label for="identifier">Username or Email</label>
-            <input type="text" id="identifier" name="identifier" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Login</button>
-        </form>
+    <div class="home-page">
+        <div class="search-container">
+            <h1>Find <span id="safe">Safe</span><span id="eats">♡</span> Restaurants Near You</h1>
+            <div class="search-bar">
+                <input type="text" id="locationSearch" placeholder="Enter a city (only New Paltz works currently btw)">
+                <button onclick="searchPosts()">Search</button>
+            </div>
+        </div>
+        <div id="search-results"></div>
     </div>
 <script type="module" src="./scripts/main.js"></script>
-<script type="module" src="./scripts/user.js"></script>    
+<script type="module" src="./scripts/home.js"></script>
 </body>
 </html>
