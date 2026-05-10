@@ -57,8 +57,30 @@ async function getAllPosts() {
     return await con.query(sql)
 }
 
+async function updatePost(post_id, post) {
+    let sql = `
+      UPDATE post
+      SET restaurant_name = ?, location = ?, review_text = ?, safety_rating = ?
+      WHERE post_id = ?
+    `
+    await con.query(sql, [
+        post.restaurant_name,
+        post.location,
+        post.review_text,
+        post.safety_rating,
+        post_id
+    ])
+}
+
+async function deletePost(post_id) {
+    let sql = `DELETE FROM post WHERE post_id = ?`
+    await con.query(sql, [post_id])
+}
+
 module.exports = { 
     createPost, 
     getPostsByUser, 
-    getAllPosts 
+    getAllPosts,
+    updatePost,
+    deletePost 
 }

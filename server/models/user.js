@@ -86,8 +86,31 @@ async function getUserByUsername(username) {
     return cUser[0]
 }
 
+async function updateUser(user_id, user) {
+    let sql = `
+    UPDATE user
+    SET username = ?, email = ?, first_name = ?, last_name = ?, bio = ?
+     WHERE user_id = ?
+    `
+    await con.query(sql, [
+        user.username,
+        user.email,
+        user.first_name,
+        user.last_name,
+        user.bio,
+        user_id
+    ])
+}
+
+async function deleteUser(user_id) {
+    let sql = `DELETE FROM user WHERE user_id = ?`
+    await con.query(sql, [user_id])
+}
+
 module.exports = {
     register,
     login,
-    getAllUsers
+    getAllUsers,
+    updateUser,
+    deleteUser
 }

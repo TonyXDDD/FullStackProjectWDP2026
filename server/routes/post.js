@@ -29,4 +29,22 @@ router.get('/getPostsByUser/:user_id', async (req, res) => {
     }
 })
 
+router.put('/updatePost/:post_id', async (req, res) => {
+    try {
+        await post.updatePost(req.params.post_id, req.body)
+        res.send({message: "Post updated successfully"})
+    } catch(err) {
+        res.status(401).send({message: err.message})
+    }
+})
+
+router.delete('/deletePost/:post_id', async (req, res) => {
+    try {
+        await post.deletePost(req.params.post_id)
+        res.send({message: "Post deleted successfully"})
+    } catch(err) {
+        res.status(401).send({message: err.message})
+    }
+})
+
 module.exports = router
