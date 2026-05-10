@@ -22,14 +22,17 @@ let logout = document.getElementById("logout")
 if(logout) logout.addEventListener('click', removeCurrentUser)
 
 export async function fetchData(route = '', data = {}, methodType) {
-  const response = await fetch(`http://localhost:3500${route}`, {
+  const options = {
     method: methodType,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
+    headers: { 'Content-Type': 'application/json' }
+  }
+  if(methodType !== 'GET') {
+    options.body = JSON.stringify(data)
+  }
+  const response = await fetch(`http://localhost:3500${route}`, options);
   if (response.ok) {
     return await response.json();
   } else {
     throw await response.json();
   }
-}
+}  

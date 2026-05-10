@@ -4,7 +4,7 @@ import { getCurrentUser } from "./user.js"
 let postForm = document.getElementById("post")
 if(postForm) postForm.addEventListener('submit', createPost)
 
-function createPost(e) {
+async function createPost(e) {
     e.preventDefault()
 
     let restaurantname = document.getElementById("restaurantName").value
@@ -28,3 +28,27 @@ function createPost(e) {
         })
         .catch(err => alert(err.message))
 }
+
+async function loadPosts() {
+    let cUser = getCurrentUser()
+    if(!cUser) return
+
+    fetchData(`/post/getPostsByUser/${cUser.user_id}`, {}, 'GET')
+        .then(posts => {
+            let container = document.getElementById("posts-container")
+            container.innerHTML = ""
+            posts.forEach(post => {
+                container.innerHTML += `
+                    <div class="post-card">
+                        <h3>${post.restaurant_name}</h3>
+                        <p class="location">${post.location}</p>
+                        <p class="rating">Rating: ${post.safety_rating}/5</p>
+                        <p class="review">${post.review_text}</p>
+                    </div>
+                `
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+loadPosts()
